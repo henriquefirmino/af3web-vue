@@ -25,7 +25,7 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 ![img](src/assets/home.jpg)
 
 ### Playlists preview
-![img](src/assets/playlists.jpg)
+![img](src/assets/playlist.jpg)
 
 ### Sobre preview
 ![img](src/assets/sobre.jpg)
