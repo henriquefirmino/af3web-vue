@@ -42,6 +42,8 @@
       </v-card-actions>
       <v-spacer> </v-spacer>
     </v-form>
+    <v-container>
+      <h3>Número de Playlists criadas: {{countplaylist}}</h3>
 
     <v-container>
       <v-data-table
@@ -55,6 +57,8 @@
 </template>
 
 <script>
+import {mapGetters} from "vuex";
+
 export default {
   data() {
     const defaultForm = Object.freeze({
@@ -69,7 +73,7 @@ export default {
         { text: "Artista", value: "artista" },
         { text: "Gênero", value: "genero" }
       ],
-      playlists: this.$store.state.playlists,
+      //playlists: this.$store.state.playlists,
       form: Object.assign({}, defaultForm),
       rules: {
         playlist: [(val) => (val || "").length > 0 || "Campo Necessário"],
@@ -86,9 +90,18 @@ export default {
   },
 
   computed: {
+    ...mapGetters(["coutplaylist"]),
+
     formIsValid() {
-      return this.form.first && this.form.last;
+      return (
+        this.form.playlist &&
+        this.form.artista &&
+        this.form.genero
+      );
     },
+    playlists() {
+      return this.$store.state.playlists;
+    }
   },
 
   methods: {
@@ -97,9 +110,10 @@ export default {
       this.$refs.form.reset();
     },
     submit() {
-      this.$store.commit("addpeople", {
-        playlist: this.form.first + " " + this.form.last,
-        artista: this.form.country,
+      //this.$store.commit("addplaylists", {
+        this.$store.dispatch("submitPlaylists", {
+        playlist: this.form.playlist,
+        artista: this.form.artista,
         genre: this.form.genre,
       });
       this.snackbar = true;

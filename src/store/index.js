@@ -44,7 +44,17 @@ export default new Vuex.Store({
                 })
             }
         },
-        actions: {},
+        actions: {
+            submitPlaylists({commit}, playlists) {
+                commit('addplaylist', playlists)
+            }
+        },
+
+        getters: {
+            countplaylists({playlists}) {
+                return playlists.length;
+            }
+        },
         modules: {}
     }
 })
